@@ -1,0 +1,281 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Themes For Sale – SiteCraft Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+  body {
+    background: #121212;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* NAVBAR */
+  .navbar {
+    width: 100%;
+    background: #1a1a1a;
+    padding: 14px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    z-index: 1000;
+  }
+
+  .navbar a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    transition: 0.3s ease;
+    position: relative;
+  }
+
+  .navbar a:hover {
+    color: #00eaff;
+    text-shadow: 0 0 8px #00eaff, 0 0 16px #00b3ff, 0 0 24px #0066ff;
+    transform: scale(1.1);
+  }
+
+  .navbar a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #00eaff;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s ease;
+  }
+
+  .navbar a:hover::after {
+    width: 100%;
+  }
+
+  /* CONTENT */
+  .container {
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 100px;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #ffffff;
+  }
+
+  .themes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .theme-card {
+    background: #1e1e1e;
+    padding: 18px;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    transition: 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-card:hover {
+    transform: translateY(-8px);
+    border-color: #00eaff;
+    box-shadow: 0 0 18px rgba(0,255,255,0.4);
+  }
+
+  .theme-card img {
+    width: 100%;
+    border-radius: 12px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  .theme-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .theme-card p {
+    font-size: 13px;
+    color: #aaaaaa;
+    margin-bottom: 14px;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .preview-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #00eaff;
+    color: #00eaff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  .preview-btn:hover {
+    background: #00eaff;
+    color: #000;
+    box-shadow: 0 0 15px #00eaff;
+  }
+
+  .buy-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: #0084ff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+    box-shadow: 0 0 12px #0084ff;
+  }
+
+  .buy-btn:hover {
+    background: #00a2ff;
+    box-shadow: 0 0 20px #00a2ff;
+  }
+
+  /* PRICE RIBBON */
+  .price-ribbon {
+    position: absolute;
+    top: 12px;
+    right: -40px;
+    background: linear-gradient(135deg, #0084ff, #00eaff);
+    color: #fff;
+    font-weight: 700;
+    padding: 6px 60px;
+    text-align: center;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    font-size: 14px;
+    border-radius: 4px;
+    z-index: 2;
+    transition: 0.3s ease;
+  }
+
+  .price-ribbon:hover {
+    transform: rotate(45deg) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  @media (max-width: 600px) {
+    .navbar {
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .navbar a {
+      font-size: 14px;
+    }
+    .btn-group {
+      flex-direction: column;
+    }
+    .price-ribbon {
+      padding: 6px 50px;
+      font-size: 13px;
+      right: -35px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <a href="index.html">Home</a>
+  <a href="login.html">Account</a>
+  <a href="packages.html">Store</a>
+  <a href="support.html">Support</a>
+</nav>
+
+<div class="container">
+  <h1> ₹0 - ₹15 </h1>
+
+  <div class="themes">
+
+    <div class="theme-card">
+      <div class="price-ribbon">₹10</div>
+      <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/images/theme1.png">
+      <h3>Portfolio Pro</h3>
+      <p>Modern portfolio theme with smooth animations and responsive layout.</p>
+      <div class="btn-group">
+        <a href="https://sites.google.com/view/sitecraft1/home" target="_blank" class="preview-btn">Preview</a>
+        <a href="https://sites.google.com/view/sitecraft4/home" target="_blank" class="buy-btn">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="price-ribbon">FREE</div>
+      <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/images/theme2.png">
+      <h3>Business Boost</h3>
+      <p>Professional business website theme with clean UI and fast performance.</p>
+      <div class="btn-group">
+        <a href="https://sites.google.com/view/sitecraft2/home" target="_blank" class="preview-btn">Preview</a>
+        <a href="https://sites.google.com/view/sitecraft5/home"_blank" class="buy-btn">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="price-ribbon">₹5</div>
+      <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/images/theme3.png">
+      <h3>Shop Smart</h3>
+      <p>Dark mode e-commerce theme with glowing UI and product layout.</p>
+      <div class="btn-group">
+        <a href="https://sites.google.com/view/sitecraft3/home" target="_blank" class="preview-btn">Preview</a>
+        <a href="https://sites.google.com/view/sitecraft6/home" target="_blank" class="buy-btn">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="price-ribbon">₹12</div>
+      <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/images/theme4.png">
+      <h3>Creative Blog</h3>
+      <p>Stylish blogging theme with smooth transitions and responsive design.</p>
+      <div class="btn-group">
+        <a href="https://sites.google.com/view/sitecraft7/home" target="_blank" class="preview-btn">Preview</a>
+        <a href="https://sites.google.com/view/sitecraft8/home" target="_blank" class="buy-btn">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="price-ribbon">₹15</div>
+      <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/images/theme5.png">
+      <h3>Startup Landing</h3>
+      <p>Perfect landing page for startups, fast, modern and mobile-friendly.</p>
+      <div class="btn-group">
+        <a href="https://sites.google.com/view/sitecraft9/home" target="_blank" class="preview-btn">Preview</a>
+        <a href="https://sites.google.com/view/sitecraft10/home" target="_blank" class="buy-btn">Buy Now</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
