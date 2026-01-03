@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -18,7 +18,6 @@
     min-height: 100vh;
   }
 
-  /* NAVBAR */
   .navbar {
     width: 100%;
     background: #1a1a1a;
@@ -63,7 +62,6 @@
     width: 100%;
   }
 
-  /* CONTENT */
   .container {
     max-width: 1200px;
     width: 100%;
@@ -100,14 +98,6 @@
     transform: translateY(-8px);
     border-color: #00eaff;
     box-shadow: 0 0 18px rgba(0,255,255,0.4);
-  }
-
-  .theme-card img {
-    width: 100%;
-    border-radius: 12px;
-    height: 150px;
-    object-fit: cover;
-    margin-bottom: 10px;
   }
 
   .theme-card h3 {
@@ -162,7 +152,6 @@
     box-shadow: 0 0 20px #00a2ff;
   }
 
-  /* PRICE RIBBON */
   .price-ribbon {
     position: absolute;
     top: 12px;
@@ -180,27 +169,11 @@
     transition: 0.3s ease;
   }
 
-  .price-ribbon:hover {
-    transform: rotate(45deg) scale(1.1);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  }
-
   @media (max-width: 600px) {
-    .navbar {
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-    .navbar a {
-      font-size: 14px;
-    }
-    .btn-group {
-      flex-direction: column;
-    }
-    .price-ribbon {
-      padding: 6px 50px;
-      font-size: 13px;
-      right: -35px;
-    }
+    .navbar { gap: 18px; flex-wrap: wrap; }
+    .navbar a { font-size: 14px; }
+    .btn-group { flex-direction: column; }
+    .price-ribbon { padding: 6px 50px; font-size: 13px; right: -35px; }
   }
 </style>
 </head>
@@ -215,57 +188,77 @@
 </nav>
 
 <div class="container">
-  <h1> ₹0 - ₹15 </h1>
+  <h1>₹75 - ₹150</h1>
 
   <div class="themes">
 
+    <!-- CARD 1 -->
     <div class="theme-card">
-      <div class="price-ribbon">₹10</div>
-      <h3>Portfolio Pro</h3>
-      <p>Modern portfolio theme with smooth animations and responsive layout.</p>
+      <div class="price-ribbon">₹99</div>
+      <video width="100%" height="150" style="border-radius:12px; object-fit:cover; margin-bottom:10px;" autoplay muted loop playsinline>
+        <source src="video1.mp4" type="video/mp4">
+      </video>
+      <h3>Snippet Stack</h3>
+      <p>A curated hub for ready-to-use coding snippets and top programming books</p>
       <div class="btn-group">
-        <a href="https://sites.google.com/view/sitecraft1/home" target="_blank" class="preview-btn">Preview</a>
-        <a href="https://sites.google.com/view/sitecraft4/home" target="_blank" class="buy-btn">Buy Now</a>
+        <a href="https://sites.google.com/view/sitecraft16/home" target="_blank" class="preview-btn">Preview</a>
+        <a href="#" target="_blank" class="buy-btn">Buy Now</a>
       </div>
     </div>
 
+    <!-- CARD 2 -->
     <div class="theme-card">
       <div class="price-ribbon">FREE</div>
+      <video width="100%" height="150" style="border-radius:12px; object-fit:cover; margin-bottom:10px;" autoplay muted loop playsinline>
+        <source src="video2.mp4" type="video/mp4">
+      </video>
       <h3>Business Boost</h3>
       <p>Professional business website theme with clean UI and fast performance.</p>
       <div class="btn-group">
-        <a href="https://sites.google.com/view/sitecraft2/home" target="_blank" class="preview-btn">Preview</a>
-        <a href="https://sites.google.com/view/sitecraft5/home"_blank" class="buy-btn">Buy Now</a>
+        <a href="#" target="_blank" class="preview-btn">Preview</a>
+        <a href="#" target="_blank" class="buy-btn">Buy Now</a>
       </div>
     </div>
 
+    <!-- CARD 3 -->
     <div class="theme-card">
       <div class="price-ribbon">₹5</div>
+      <video width="100%" height="150" style="border-radius:12px; object-fit:cover; margin-bottom:10px;" autoplay muted loop playsinline>
+        <source src="video3.mp4" type="video/mp4">
+      </video>
       <h3>Shop Smart</h3>
       <p>Dark mode e-commerce theme with glowing UI and product layout.</p>
       <div class="btn-group">
-        <a href="https://sites.google.com/view/sitecraft3/home" target="_blank" class="preview-btn">Preview</a>
-        <a href="https://sites.google.com/view/sitecraft6/home" target="_blank" class="buy-btn">Buy Now</a>
+        <a href="#" target="_blank" class="preview-btn">Preview</a>
+        <a href="#" target="_blank" class="buy-btn">Buy Now</a>
       </div>
     </div>
 
+    <!-- CARD 4 -->
     <div class="theme-card">
       <div class="price-ribbon">₹12</div>
+      <video width="100%" height="150" style="border-radius:12px; object-fit:cover; margin-bottom:10px;" autoplay muted loop playsinline>
+        <source src="video4.mp4" type="video/mp4">
+      </video>
       <h3>Creative Blog</h3>
       <p>Stylish blogging theme with smooth transitions and responsive design.</p>
       <div class="btn-group">
-        <a href="https://sites.google.com/view/sitecraft7/home" target="_blank" class="preview-btn">Preview</a>
-        <a href="https://sites.google.com/view/sitecraft8/home" target="_blank" class="buy-btn">Buy Now</a>
+        <a href="#" target="_blank" class="preview-btn">Preview</a>
+        <a href="#" target="_blank" class="buy-btn">Buy Now</a>
       </div>
     </div>
 
+    <!-- CARD 5 -->
     <div class="theme-card">
       <div class="price-ribbon">₹15</div>
+      <video width="100%" height="150" style="border-radius:12px; object-fit:cover; margin-bottom:10px;" autoplay muted loop playsinline>
+        <source src="video5.mp4" type="video/mp4">
+      </video>
       <h3>Startup Landing</h3>
       <p>Perfect landing page for startups, fast, modern and mobile-friendly.</p>
       <div class="btn-group">
-        <a href="https://sites.google.com/view/sitecraft9/home" target="_blank" class="preview-btn">Preview</a>
-        <a href="https://sites.google.com/view/sitecraft10/home" target="_blank" class="buy-btn">Buy Now</a>
+        <a href="#" target="_blank" class="preview-btn">Preview</a>
+        <a href="#" target="_blank" class="buy-btn">Buy Now</a>
       </div>
     </div>
 
