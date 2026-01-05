@@ -131,16 +131,11 @@ input{
   <div class="payment-methods" id="methods">
 
     <!-- Input label -->
-    <div class="text-card">Enter UPI Payment Amount</div>
+    <div class="text-card">Enter Amount Below</div>
 
     <!-- Manual amount input -->
     <input type="number" id="amountInput" placeholder="Enter amount (min ₹20)" min="20"/>
-
-    <!-- Fixed price shown below -->
-    <div class="text-card" style="color:#fff; border-color:#00bcd4;">
-      Fixed Price: <b>₹49</b> (Non-editable)
-    </div>
-
+   
     <!-- Pay Button -->
     <button class="pay-btn upi-pay" id="payBtn">Pay with UPI</button>
 
@@ -173,14 +168,14 @@ document.getElementById("payBtn").onclick = function(){
   }
 
   // Success style
-  popup.innerText = "Payment Initiated Successfully!";
+  popup.innerText = "Redirecting to UPI apps...";
   popup.style.color = "#00e5ff";
   popup.style.border = "1px solid rgba(0,229,255,0.3)";
   popup.style.boxShadow = "0 0 20px rgba(0,229,255,0.18)";
   popup.style.display = "block";
 
   // UPI redirect after animation
-  let upiUrl = `upi://pay?pa=sitecraft005751@oksbi&am=${amount}&cu=INR&tn=Order Payment`;
+  let upiUrl = `upi://pay?pa=sitecraft001@oksbi&am=${amount}&cu=INR&tn=Order Payment`;
   setTimeout(()=> window.location.href = upiUrl, 1500);
 };
 </script>
