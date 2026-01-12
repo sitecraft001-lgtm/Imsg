@@ -2,182 +2,217 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Cool TTS Converter</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment Options</title>
 
 <style>
-body{
-  background:#0f0f0f;
-  font-family:Arial, sans-serif;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  margin:0;
+:root {
+    --bg: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    --card: rgba(0,0,0,0.4);
+    --text: #ffffff;
+    --accent: #00eaff;
 }
 
-.payment-box{
-  background:#161616;
-  padding:25px;
-  border-radius:14px;
-  width:400px;
-  text-align:center;
-  box-shadow:0 0 20px rgba(0,229,255,0.12);
-  position:relative;
+.light {
+    --bg: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    --card: rgba(255,255,255,0.8);
+    --text: #000;
+    --accent: #0077ff;
 }
 
-.payment-box h2{
-  color:#fff;
-  margin-bottom:20px;
-  font-size:20px;
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: 0.4s;
 }
 
-/* Buttons */
-.pay-btn{
-  width:100%;
-  padding:14px;
-  margin:12px 0;
-  font-size:16px;
-  font-weight:600;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  transition:0.3s;
+.tts-card {
+    background: var(--card);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    padding: 25px;
+    width: 100%;
+    max-width: 430px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
 }
 
-.main-pay{
-  background:#00bcd4;
-  color:#000;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.upi-pay{
-  background:#00e676;
-  color:#000;
+h1 {
+    font-size: 1.6rem;
+    color: var(--accent);
 }
 
-/* Text card */
-.text-card{
-  background:#111;
-  padding:12px;
-  border-radius:8px;
-  color:#00e5ff;
-  font-size:14px;
-  margin-top:12px;
-  border:1px solid rgba(0,229,255,0.25);
+.toggle {
+    cursor: pointer;
+    font-size: 20px;
 }
 
-/* Hidden section */
-.payment-methods{
-  display:none;
+textarea {
+    width: 100%;
+    height: 120px;
+    border-radius: 12px;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+    outline: none;
+    resize: none;
+    background: rgba(0,0,0,0.6);
+    color: #0ff;
 }
 
-/* Input */
-input{
-  width:85%;
-  padding:12px;
-  border-radius:8px;
-  border:none;
-  font-size:15px;
-  text-align:center;
-  background:#1a1a1a;
-  color:#fff;
-  margin:10px 0;
-  outline:none;
+.light textarea {
+    background: #fff;
+    color: #000;
 }
 
-/* Minimum / Success Popup */
-.success-popup{
-  display:none;
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%) scale(0.8);
-  background:#1e1e1e;
-  color:#00e5ff;
-  padding:18px 24px;
-  border-radius:14px;
-  font-size:15px;
-  font-weight:600;
-  border:1px solid rgba(0,229,255,0.3);
-  box-shadow:0 0 20px rgba(0,229,255,0.18);
-  opacity:0;
-  animation:popAnim 0.4s forwards ease;
-  z-index:999;
+label {
+    display: block;
+    margin-top: 12px;
+    font-size: 13px;
+    opacity: 0.9;
 }
 
-@keyframes popAnim{
-  to{
-    opacity:1;
-    transform:translate(-50%, -50%) scale(1);
-  }
+select, input[type="range"] {
+    width: 100%;
+    margin-top: 6px;
+}
+
+select {
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+button {
+    flex: 1;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.speak {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 0 12px var(--accent);
+}
+
+.pause {
+    background: #ffaa00;
+}
+
+.stop {
+    background: #ff4b4b;
+    color: #fff;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+footer {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 11px;
+    opacity: 0.7;
 }
 </style>
 </head>
 
 <body>
 
-<div class="payment-box">
+<div class="tts-card">
+    <div class="header">
+        <h1>🎙 Text to Speech</h1>
+        <div class="toggle" onclick="toggleMode()">🌙</div>
+    </div>
 
-  <!-- Popup -->
-  <div class="success-popup" id="popupBox"></div>
+    <textarea id="text" placeholder="Type something cool here..."></textarea>
 
-  <!-- Title -->
-  <h2 id="selectTitle" style="display:none;">Select Payment Method</h2>
+    <label>Voice (Language + Name)</label>
+    <select id="voiceSelect"></select>
 
-  <!-- Pay Now -->
-  <button class="pay-btn main-pay" id="payNow">Pay Now</button>
+    <label>Speed</label>
+    <input type="range" id="rate" min="0.5" max="2" value="1" step="0.1">
 
-  <!-- Payment section -->
-  <div class="payment-methods" id="methods">
+    <label>Pitch</label>
+    <input type="range" id="pitch" min="0" max="2" value="1" step="0.1">
 
-    <!-- Input label -->
-    <div class="text-card">Enter Amount Below</div>
+    <div class="controls">
+        <button class="speak" onclick="speakText()">▶ Speak</button>
+        <button class="pause" onclick="pauseSpeech()">⏸ Pause</button>
+        <button class="stop" onclick="stopSpeech()">⏹ Stop</button>
+    </div>
 
-    <!-- Manual amount input -->
-    <input type="number" id="amountInput" placeholder="Enter amount (min ₹20)" min="20"/>
-   
-    <!-- Pay Button -->
-    <button class="pay-btn upi-pay" id="payBtn">Pay with UPI</button>
-
-  </div>
-
+    <footer>Powered by Web Speech API • SiteCraft Style</footer>
 </div>
 
 <script>
-// Show payment section
-document.getElementById("payNow").onclick = function(){
-  this.style.display = "none";
-  document.getElementById("methods").style.display = "block";
-  document.getElementById("selectTitle").style.display = "block";
-};
+const textInput = document.getElementById("text");
+const voiceSelect = document.getElementById("voiceSelect");
+const rateInput = document.getElementById("rate");
+const pitchInput = document.getElementById("pitch");
 
-// Pay button click
-document.getElementById("payBtn").onclick = function(){
-  let amount = document.getElementById("amountInput").value;
-  let popup = document.getElementById("popupBox");
+let voices = [];
+let utterance;
 
-  if(!amount || amount < 20){
-    popup.innerText = "Minimum payment amount is ₹20!";
-    popup.style.color = "#ff3d00";
-    popup.style.border = "1px solid rgba(255,61,0,0.4)";
-    popup.style.boxShadow = "0 0 20px rgba(255,61,0,0.22)";
-    popup.style.display = "block";
+function loadVoices() {
+    voices = speechSynthesis.getVoices();
+    voiceSelect.innerHTML = "";
 
-    setTimeout(()=> popup.style.display="none", 1800);
-    return;
-  }
+    voices.forEach((voice, i) => {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = `${voice.lang} - ${voice.name}`;
+        voiceSelect.appendChild(option);
+    });
+}
 
-  // Success style
-  popup.innerText = "Redirecting to UPI apps...";
-  popup.style.color = "#00e5ff";
-  popup.style.border = "1px solid rgba(0,229,255,0.3)";
-  popup.style.boxShadow = "0 0 20px rgba(0,229,255,0.18)";
-  popup.style.display = "block";
+speechSynthesis.onvoiceschanged = loadVoices;
+loadVoices();
 
-  // UPI redirect after animation
-  let upiUrl = `upi://pay?pa=sitecraft001@oksbi&am=${amount}&cu=INR&tn=Order Payment`;
-  setTimeout(()=> window.location.href = upiUrl, 1500);
-};
+function speakText() {
+    if (!textInput.value.trim()) return alert("Enter some text!");
+    speechSynthesis.cancel();
+
+    utterance = new SpeechSynthesisUtterance(textInput.value);
+    utterance.voice = voices[voiceSelect.value];
+    utterance.rate = rateInput.value;
+    utterance.pitch = pitchInput.value;
+
+    speechSynthesis.speak(utterance);
+}
+
+function pauseSpeech() {
+    speechSynthesis.paused ? speechSynthesis.resume() : speechSynthesis.pause();
+}
+
+function stopSpeech() {
+    speechSynthesis.cancel();
+}
+
+function toggleMode() {
+    document.body.classList.toggle("light");
+}
 </script>
 
 </body>
