@@ -8,8 +8,8 @@
 <style>
 :root {
   --bg: radial-gradient(1000px 600px at top, #111836, #05070d);
-  --panel: rgba(20, 26, 48, 0.88);
-  --panel-soft: rgba(255,255,255,0.03);
+  --panel: rgba(20, 26, 48, 0.9);
+  --panel-soft: rgba(255,255,255,0.04);
   --text: #e8ecf6;
   --muted: #9aa3b2;
   --border: rgba(255,255,255,0.08);
@@ -30,7 +30,6 @@ body {
   font-family: Inter, system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
-  min-height: 100vh;
 }
 
 /* HEADER */
@@ -54,7 +53,6 @@ body {
 
 .brand h1 {
   font-size: 20px;
-  font-weight: 600;
 }
 
 .nav a {
@@ -77,7 +75,6 @@ body {
 
 .codes h2 {
   font-size: 32px;
-  letter-spacing: 0.6px;
 }
 
 .muted {
@@ -85,7 +82,7 @@ body {
   margin-top: 8px;
 }
 
-/* SEARCH BAR */
+/* SEARCH */
 .search-box {
   margin-top: 32px;
   display: flex;
@@ -102,7 +99,6 @@ body {
   border: 1px solid var(--border);
   border-radius: 16px;
   outline: none;
-  transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .search-box input:focus {
@@ -128,11 +124,11 @@ body {
 }
 
 .snippet:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 40px 80px rgba(0,0,0,0.75);
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 45px 90px rgba(0,0,0,0.8);
 }
 
-/* CARD HEADER */
+/* HEADER */
 .snippet-header {
   padding: 18px;
   display: flex;
@@ -143,8 +139,6 @@ body {
 
 .snippet-header h3 {
   font-size: 18px;
-  font-weight: 600;
-  text-align: left;
 }
 
 /* BUTTON */
@@ -155,7 +149,6 @@ body {
   border: 1px solid var(--border);
   color: var(--text);
   cursor: pointer;
-  font-size: 14px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -169,14 +162,12 @@ body {
   background: #070b1f;
   padding: 18px;
   font-size: 14px;
-  line-height: 1.6;
   overflow-x: auto;
 }
 
 .code-block code {
   font-family: "JetBrains Mono", monospace;
   white-space: pre;
-  color: #cdd6ff;
 }
 
 /* TAGS */
@@ -194,15 +185,38 @@ body {
   border-radius: 999px;
   font-size: 12px;
   color: var(--muted);
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.06);
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.tag:hover,
-.tag.active {
+.tag:hover {
+  transform: translateY(-2px);
   background: var(--accent-soft);
   color: var(--accent);
+}
+
+/* SHOW MORE */
+.show-more {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.show-more button {
+  padding: 12px 26px;
+  font-size: 15px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1a2140, #0f1430);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.show-more button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
 }
 
 /* FOOTER */
@@ -213,19 +227,6 @@ body {
   color: var(--muted);
   font-size: 13px;
   text-align: center;
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-  .snippet-header {
-    flex-direction: column;
-    gap: 12px;
-    align-items: stretch;
-  }
-
-  .btn {
-    width: 100%;
-  }
 }
 </style>
 
@@ -246,80 +247,85 @@ body {
 
 <main class="codes">
   <h2>Python Snippets</h2>
-  <p class="muted">Search • Filter • Copy instantly</p>
+  <p class="muted">Load snippets smoothly</p>
 
   <div class="search-box">
-    <input id="search" type="search" placeholder="Search by title, tag, or code…" />
+    <input id="search" type="search" placeholder="Search snippets…" />
   </div>
 
   <section id="snippetList" class="snippet-list"></section>
+
+  <div class="show-more">
+    <button id="showMoreBtn">Show More</button>
+  </div>
 </main>
 
 <footer class="site-footer">
-  © 2026 ZingBook • Premium Snippet Library
+  © 2026 ZingBook
 </footer>
 
 <script>
 const list = document.getElementById("snippetList");
 const search = document.getElementById("search");
-let activeTag = "";
+const showMoreBtn = document.getElementById("showMoreBtn");
 
-SNIPPETS.forEach(s => {
-  const el = document.createElement("article");
-  el.className = "snippet";
-  el.dataset.search =
-    (s.title + " " + s.code + " " + s.tags.join(" ")).toLowerCase();
+let visibleCount = 5;
+const STEP = 5;
+let filtered = [];
 
-  el.innerHTML = `
-    <header class="snippet-header">
-      <h3>${s.title}</h3>
-      <button class="btn copy-btn" data-id="${s.id}">Copy</button>
-    </header>
+function render() {
+  list.innerHTML = "";
+  filtered.slice(0, visibleCount).forEach(s => {
+    const el = document.createElement("article");
+    el.className = "snippet";
+    el.innerHTML = `
+      <header class="snippet-header">
+        <h3>${s.title}</h3>
+        <button class="btn copy-btn" data-id="${s.id}">Copy</button>
+      </header>
+      <pre class="code-block"><code id="${s.id}">${s.code}</code></pre>
+      <footer class="snippet-meta">
+        ${s.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+      </footer>
+    `;
+    list.appendChild(el);
+  });
 
-    <pre class="code-block"><code id="${s.id}">${s.code}</code></pre>
+  showMoreBtn.style.display =
+    visibleCount < filtered.length ? "inline-block" : "none";
+}
 
-    <footer class="snippet-meta">
-      ${s.tags.map(t => `<span class="tag" data-tag="${t}">${t}</span>`).join("")}
-    </footer>
-  `;
+function applyFilter() {
+  const q = search.value.toLowerCase();
+  visibleCount = STEP;
+  filtered = SNIPPETS.filter(s =>
+    (s.title + s.code + s.tags.join(" "))
+      .toLowerCase()
+      .includes(q)
+  );
+  render();
+}
 
-  list.appendChild(el);
+search.addEventListener("input", applyFilter);
+
+showMoreBtn.addEventListener("click", () => {
+  visibleCount += STEP;
+  render();
 });
 
 /* COPY */
 document.addEventListener("click", async e => {
   const btn = e.target.closest(".copy-btn");
-  if (btn) {
-    const code = document.getElementById(btn.dataset.id);
-    await navigator.clipboard.writeText(code.textContent);
-    btn.textContent = "Copied ✓";
-    setTimeout(() => btn.textContent = "Copy", 1200);
-  }
-
-  const tag = e.target.closest(".tag");
-  if (tag) {
-    activeTag = tag.dataset.tag.toLowerCase();
-    document.querySelectorAll(".tag").forEach(t => t.classList.remove("active"));
-    tag.classList.add("active");
-    filterSnippets();
-  }
+  if (!btn) return;
+  const code = document.getElementById(btn.dataset.id);
+  await navigator.clipboard.writeText(code.textContent);
+  btn.textContent = "Copied ✓";
+  setTimeout(() => btn.textContent = "Copy", 1200);
 });
 
-/* SEARCH */
-search.addEventListener("input", () => {
-  activeTag = "";
-  document.querySelectorAll(".tag").forEach(t => t.classList.remove("active"));
-  filterSnippets();
-});
-
-function filterSnippets() {
-  const q = search.value.toLowerCase();
-  document.querySelectorAll(".snippet").forEach(s => {
-    const matchText = s.dataset.search.includes(q);
-    const matchTag = !activeTag || s.dataset.search.includes(activeTag);
-    s.style.display = matchText && matchTag ? "" : "none";
-  });
-}
+/* INIT */
+filtered = [...SNIPPETS];
+render();
 </script>
 
 </body>
