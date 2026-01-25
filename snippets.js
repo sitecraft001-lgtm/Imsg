@@ -11,5 +11,40 @@ const SNIPPETS = [
     tags: ["api", "http"],
     code: `import requests
 print(requests.get("https://api.github.com").json())`
-  }
+  },
+   {
+    id: "requests",
+    title: "GET Request",
+    tags: ["api", "http"],
+    code: `import requests
+print(requests.get("https://api.github.com").json())`
+   },
+   {
+    id: "requests",
+    title: "GET Request",
+    tags: ["api", "http"],
+    code: `import requests
+print(requests.get("https://api.github.com").json())`
+  },
+   {
+    id: "requests",
+    title: "GET Request",
+    tags: ["api", "http"],
+    code: `import requests
+print(requests.get("https://api.github.com").json())`
+  },
+   {
+    id: "requests",
+    title: "GET Request",
+    tags: ["api", "http"],
+    code: `import requests
+print(requests.get("https://api.github.com").json())`
+  },
+  {
+    id: "requests",
+    title: "GET Request",
+    tags: ["api", "http"],
+    code: `import requests
+print(requests.get("https://api.github.com").json())`
+  } 
 ];
