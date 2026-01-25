@@ -7,16 +7,14 @@
 
 <style>
 :root {
-  --bg: radial-gradient(1000px 600px at top, #111836, #05070d);
-  --panel: rgba(20, 26, 48, 0.92);
-  --panel-soft: rgba(255,255,255,0.04);
-  --text: #e8ecf6;
+  --bg: #070a14;
+  --panel: #0f1528;
+  --panel-soft: #121a33;
+  --text: #e6ebf5;
   --muted: #9aa3b2;
   --border: rgba(255,255,255,0.08);
   --accent: #6cf2c2;
-  --accent-soft: rgba(108,242,194,0.25);
-  --shadow: 0 25px 60px rgba(0,0,0,0.6);
-  --radius: 18px;
+  --radius: 16px;
   --max-width: 1200px;
 }
 
@@ -27,7 +25,7 @@
 }
 
 body {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
 }
@@ -37,135 +35,98 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  padding: 18px 22px;
+  padding: 16px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  backdrop-filter: blur(16px);
+  background: #070a14;
   border-bottom: 1px solid var(--border);
-  transition: background 0.4s ease;
-}
-
-.site-header:hover {
-  background: rgba(15,20,40,0.75);
 }
 
 .brand {
   display: flex;
+  gap: 8px;
   align-items: center;
-  gap: 10px;
 }
 
 .brand h1 {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .nav a {
   color: var(--muted);
   text-decoration: none;
   font-size: 14px;
-  transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
 .nav a:hover {
   color: var(--accent);
-  text-shadow: 0 0 12px var(--accent-soft);
 }
 
 /* MAIN */
 .codes {
   max-width: var(--max-width);
   margin: auto;
-  padding: 48px 16px;
+  padding: 36px 16px;
   text-align: center;
 }
 
 .codes h2 {
-  font-size: 32px;
+  font-size: 26px;
 }
 
 .muted {
-  margin-top: 8px;
+  margin-top: 6px;
   color: var(--muted);
 }
 
 /* SEARCH */
 .search-box {
-  margin-top: 32px;
+  margin-top: 24px;
   display: flex;
   justify-content: center;
 }
 
 .search-box input {
   width: 100%;
-  max-width: 560px;
-  padding: 16px 18px;
+  max-width: 520px;
+  padding: 14px;
   font-size: 15px;
-  background: rgba(10,14,30,0.95);
+  background: var(--panel);
   color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 12px;
   outline: none;
-  transition: 
-    border 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.2s ease;
-}
-
-.search-box input:hover {
-  transform: scale(1.01);
 }
 
 .search-box input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 /* GRID */
 .snippet-list {
   display: grid;
-  gap: 30px;
-  margin-top: 48px;
+  gap: 20px;
+  margin-top: 36px;
 }
 
 /* CARD */
 .snippet {
-  position: relative;
-  background: linear-gradient(180deg, var(--panel), rgba(12,16,32,0.95));
-  border-radius: var(--radius);
+  background: var(--panel);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  border-radius: var(--radius);
   overflow: hidden;
-  transition: 
-    transform 0.45s cubic-bezier(.2,.8,.2,1),
-    box-shadow 0.45s ease;
-}
-
-.snippet::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    400px 120px at top,
-    rgba(108,242,194,0.15),
-    transparent
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.snippet:hover::before {
-  opacity: 1;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .snippet:hover {
-  transform: translateY(-12px) scale(1.015);
-  box-shadow: 0 45px 90px rgba(0,0,0,0.8);
+  transform: translateY(-4px);
+  border-color: rgba(108,242,194,0.4);
 }
 
 /* HEADER */
 .snippet-header {
-  padding: 18px;
+  padding: 14px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -173,60 +134,34 @@ body {
 }
 
 .snippet-header h3 {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 /* BUTTON */
 .btn {
-  position: relative;
-  padding: 8px 16px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #1a2140, #0f1430);
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 8px;
+  background: #0b1022;
   border: 1px solid var(--border);
   color: var(--text);
   cursor: pointer;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.2),
-    transparent
-  );
-  transform: translateX(-100%);
-}
-
-.btn:hover::after {
-  transform: translateX(100%);
-  transition: transform 0.6s ease;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.6);
+  border-color: var(--accent);
 }
 
 /* CODE */
 .code-block {
-  background: #070b1f;
-  padding: 18px;
-  font-size: 14px;
+  background: #0b1022;
+  padding: 16px;
+  font-size: 13px;
   overflow-x: auto;
-  transition: box-shadow 0.3s ease;
-}
-
-.snippet:hover .code-block {
-  box-shadow: inset 0 0 0 1px rgba(108,242,194,0.15);
 }
 
 .code-block code {
-  font-family: "JetBrains Mono", monospace;
+  font-family: monospace;
   white-space: pre;
 }
 
@@ -234,60 +169,49 @@ body {
 .snippet-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   justify-content: center;
-  padding: 16px;
+  padding: 12px;
   background: var(--panel-soft);
 }
 
 .tag {
-  padding: 6px 14px;
-  border-radius: 999px;
+  padding: 5px 12px;
   font-size: 12px;
+  border-radius: 999px;
+  background: #0b1022;
   color: var(--muted);
-  background: rgba(255,255,255,0.06);
-  cursor: pointer;
-  transition: 
-    transform 0.2s ease,
-    background 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease;
 }
 
 .tag:hover {
-  transform: translateY(-3px);
-  background: var(--accent-soft);
   color: var(--accent);
-  box-shadow: 0 6px 16px rgba(108,242,194,0.35);
 }
 
 /* SHOW MORE */
 .show-more {
-  margin-top: 42px;
+  margin-top: 32px;
   display: flex;
   justify-content: center;
 }
 
 .show-more button {
-  padding: 12px 28px;
-  border-radius: 16px;
-  font-size: 15px;
-  background: linear-gradient(135deg, #1a2140, #0f1430);
+  padding: 10px 22px;
+  font-size: 14px;
+  border-radius: 12px;
+  background: #0b1022;
   border: 1px solid var(--border);
   color: var(--text);
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .show-more button:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.7);
+  border-color: var(--accent);
 }
 
 /* FOOTER */
 .site-footer {
-  margin-top: 64px;
-  padding: 24px;
+  margin-top: 48px;
+  padding: 20px;
   border-top: 1px solid var(--border);
   text-align: center;
   font-size: 13px;
@@ -312,7 +236,7 @@ body {
 
 <main class="codes">
   <h2>Python Snippets</h2>
-  <p class="muted">Hover • Search • Copy • Enjoy</p>
+  <p class="muted">Fast • Clean • Smooth</p>
 
   <div class="search-box">
     <input id="search" type="search" placeholder="Search snippets…" />
@@ -355,19 +279,24 @@ function render() {
     `;
     list.appendChild(el);
   });
-  showMoreBtn.style.display = visible < filtered.length ? "inline-block" : "none";
+
+  showMoreBtn.style.display =
+    visible < filtered.length ? "block" : "none";
 }
 
 function filter() {
   const q = search.value.toLowerCase();
   visible = STEP;
   filtered = SNIPPETS.filter(s =>
-    (s.title + s.code + s.tags.join(" ")).toLowerCase().includes(q)
+    (s.title + s.code + s.tags.join(" "))
+      .toLowerCase()
+      .includes(q)
   );
   render();
 }
 
 search.addEventListener("input", filter);
+
 showMoreBtn.addEventListener("click", () => {
   visible += STEP;
   render();
