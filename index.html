@@ -8,13 +8,13 @@
 <style>
 :root {
   --bg: radial-gradient(1000px 600px at top, #111836, #05070d);
-  --panel: rgba(20, 26, 48, 0.9);
+  --panel: rgba(20, 26, 48, 0.92);
   --panel-soft: rgba(255,255,255,0.04);
   --text: #e8ecf6;
   --muted: #9aa3b2;
   --border: rgba(255,255,255,0.08);
   --accent: #6cf2c2;
-  --accent-soft: rgba(108,242,194,0.2);
+  --accent-soft: rgba(108,242,194,0.25);
   --shadow: 0 25px 60px rgba(0,0,0,0.6);
   --radius: 18px;
   --max-width: 1200px;
@@ -37,18 +37,23 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
+  padding: 18px 22px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 22px;
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
+  transition: background 0.4s ease;
+}
+
+.site-header:hover {
+  background: rgba(15,20,40,0.75);
 }
 
 .brand {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
 }
 
 .brand h1 {
@@ -59,10 +64,12 @@ body {
   color: var(--muted);
   text-decoration: none;
   font-size: 14px;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
 .nav a:hover {
   color: var(--accent);
+  text-shadow: 0 0 12px var(--accent-soft);
 }
 
 /* MAIN */
@@ -78,8 +85,8 @@ body {
 }
 
 .muted {
-  color: var(--muted);
   margin-top: 8px;
+  color: var(--muted);
 }
 
 /* SEARCH */
@@ -99,6 +106,14 @@ body {
   border: 1px solid var(--border);
   border-radius: 16px;
   outline: none;
+  transition: 
+    border 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+}
+
+.search-box input:hover {
+  transform: scale(1.01);
 }
 
 .search-box input:focus {
@@ -109,22 +124,42 @@ body {
 /* GRID */
 .snippet-list {
   display: grid;
-  gap: 28px;
+  gap: 30px;
   margin-top: 48px;
 }
 
 /* CARD */
 .snippet {
+  position: relative;
   background: linear-gradient(180deg, var(--panel), rgba(12,16,32,0.95));
   border-radius: var(--radius);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   overflow: hidden;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transition: 
+    transform 0.45s cubic-bezier(.2,.8,.2,1),
+    box-shadow 0.45s ease;
+}
+
+.snippet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    400px 120px at top,
+    rgba(108,242,194,0.15),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.snippet:hover::before {
+  opacity: 1;
 }
 
 .snippet:hover {
-  transform: translateY(-10px) scale(1.01);
+  transform: translateY(-12px) scale(1.015);
   box-shadow: 0 45px 90px rgba(0,0,0,0.8);
 }
 
@@ -143,18 +178,38 @@ body {
 
 /* BUTTON */
 .btn {
+  position: relative;
   padding: 8px 16px;
   border-radius: 10px;
   background: linear-gradient(135deg, #1a2140, #0f1430);
   border: 1px solid var(--border);
   color: var(--text);
   cursor: pointer;
+  overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+}
+
+.btn:hover::after {
+  transform: translateX(100%);
+  transition: transform 0.6s ease;
 }
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.6);
 }
 
 /* CODE */
@@ -163,6 +218,11 @@ body {
   padding: 18px;
   font-size: 14px;
   overflow-x: auto;
+  transition: box-shadow 0.3s ease;
+}
+
+.snippet:hover .code-block {
+  box-shadow: inset 0 0 0 1px rgba(108,242,194,0.15);
 }
 
 .code-block code {
@@ -187,26 +247,31 @@ body {
   color: var(--muted);
   background: rgba(255,255,255,0.06);
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: 
+    transform 0.2s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .tag:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   background: var(--accent-soft);
   color: var(--accent);
+  box-shadow: 0 6px 16px rgba(108,242,194,0.35);
 }
 
 /* SHOW MORE */
 .show-more {
-  margin-top: 40px;
+  margin-top: 42px;
   display: flex;
   justify-content: center;
 }
 
 .show-more button {
-  padding: 12px 26px;
+  padding: 12px 28px;
+  border-radius: 16px;
   font-size: 15px;
-  border-radius: 14px;
   background: linear-gradient(135deg, #1a2140, #0f1430);
   border: 1px solid var(--border);
   color: var(--text);
@@ -215,8 +280,8 @@ body {
 }
 
 .show-more button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.7);
 }
 
 /* FOOTER */
@@ -224,9 +289,9 @@ body {
   margin-top: 64px;
   padding: 24px;
   border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 13px;
   text-align: center;
+  font-size: 13px;
+  color: var(--muted);
 }
 </style>
 
@@ -247,7 +312,7 @@ body {
 
 <main class="codes">
   <h2>Python Snippets</h2>
-  <p class="muted">Load snippets smoothly</p>
+  <p class="muted">Hover • Search • Copy • Enjoy</p>
 
   <div class="search-box">
     <input id="search" type="search" placeholder="Search snippets…" />
@@ -269,13 +334,13 @@ const list = document.getElementById("snippetList");
 const search = document.getElementById("search");
 const showMoreBtn = document.getElementById("showMoreBtn");
 
-let visibleCount = 5;
+let visible = 5;
 const STEP = 5;
 let filtered = [];
 
 function render() {
   list.innerHTML = "";
-  filtered.slice(0, visibleCount).forEach(s => {
+  filtered.slice(0, visible).forEach(s => {
     const el = document.createElement("article");
     el.className = "snippet";
     el.innerHTML = `
@@ -290,30 +355,24 @@ function render() {
     `;
     list.appendChild(el);
   });
-
-  showMoreBtn.style.display =
-    visibleCount < filtered.length ? "inline-block" : "none";
+  showMoreBtn.style.display = visible < filtered.length ? "inline-block" : "none";
 }
 
-function applyFilter() {
+function filter() {
   const q = search.value.toLowerCase();
-  visibleCount = STEP;
+  visible = STEP;
   filtered = SNIPPETS.filter(s =>
-    (s.title + s.code + s.tags.join(" "))
-      .toLowerCase()
-      .includes(q)
+    (s.title + s.code + s.tags.join(" ")).toLowerCase().includes(q)
   );
   render();
 }
 
-search.addEventListener("input", applyFilter);
-
+search.addEventListener("input", filter);
 showMoreBtn.addEventListener("click", () => {
-  visibleCount += STEP;
+  visible += STEP;
   render();
 });
 
-/* COPY */
 document.addEventListener("click", async e => {
   const btn = e.target.closest(".copy-btn");
   if (!btn) return;
@@ -323,7 +382,6 @@ document.addEventListener("click", async e => {
   setTimeout(() => btn.textContent = "Copy", 1200);
 });
 
-/* INIT */
 filtered = [...SNIPPETS];
 render();
 </script>
