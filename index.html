@@ -1,251 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Cool TTS Converter</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ZingBook — Python Snippets</title>
 
 <style>
 :root {
-    --bg: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    --card: rgba(0,0,0,0.4);
-    --text: #ffffff;
-    --accent: #00eaff;
+  --bg: radial-gradient(1200px 600px at top, #111836, #06080f);
+  --panel: rgba(18, 24, 42, 0.85);
+  --muted: #9aa3b2;
+  --text: #e6ebf5;
+  --border: rgba(255,255,255,0.08);
+  --tag: rgba(255,255,255,0.08);
+  --accent: #6cf2c2;
+  --shadow: 0 20px 40px rgba(0,0,0,0.55);
+  --radius: 16px;
+  --max-width: 1200px;
+  --blur: blur(14px);
 }
 
-.light {
-    --bg: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-    --card: rgba(255,255,255,0.8);
-    --text: #000;
-    --accent: #0077ff;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    transition: 0.4s;
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
 }
 
-.tts-card {
-    background: var(--card);
-    backdrop-filter: blur(14px);
-    border-radius: 18px;
-    padding: 25px;
+/* HEADER */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: var(--blur);
+}
+
+.brand {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.brand h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.25s ease;
+}
+
+.nav a:hover {
+  color: var(--accent);
+}
+
+/* MAIN */
+.codes {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 40px 16px;
+  text-align: center;
+}
+
+.codes h2 {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+
+.muted {
+  color: var(--muted);
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+/* SEARCH */
+.filters {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+}
+
+.filters input {
+  max-width: 540px;
+  width: 100%;
+  padding: 16px;
+  font-size: 15px;
+  background: rgba(14, 20, 38, 0.9);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-align: center;
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filters input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(108,242,194,0.15);
+}
+
+/* SNIPPETS */
+.snippet-list {
+  display: grid;
+  gap: 26px;
+  margin-top: 40px;
+}
+
+.snippet {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: var(--blur);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.snippet:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.65);
+}
+
+/* SNIPPET HEADER */
+.snippet-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.snippet-header h3 {
+  font-size: 17px;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* BUTTON */
+.btn {
+  padding: 9px 16px;
+  background: linear-gradient(135deg, #0e1426, #141c36);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+/* CODE */
+.code-block {
+  padding: 18px;
+  background: rgba(10, 14, 30, 0.9);
+  overflow-x: auto;
+  text-align: left;
+  font-size: 14px;
+}
+
+.code-block code {
+  font-family: "JetBrains Mono", monospace;
+  white-space: pre;
+  line-height: 1.6;
+}
+
+/* TAGS */
+.snippet-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px;
+}
+
+.tag {
+  background: var(--tag);
+  color: var(--muted);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.tag:hover {
+  background: rgba(108,242,194,0.15);
+  color: var(--accent);
+}
+
+/* FOOTER */
+.site-footer {
+  margin-top: 60px;
+  padding: 22px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* 📱 MOBILE */
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .snippet-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
     width: 100%;
-    max-width: 430px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-}
+  }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-h1 {
-    font-size: 1.6rem;
-    color: var(--accent);
-}
-
-.toggle {
-    cursor: pointer;
-    font-size: 20px;
-}
-
-textarea {
-    width: 100%;
-    height: 120px;
-    border-radius: 12px;
-    border: none;
-    padding: 12px;
-    font-size: 14px;
-    outline: none;
-    resize: none;
-    background: rgba(0,0,0,0.6);
-    color: #0ff;
-}
-
-.light textarea {
-    background: #fff;
-    color: #000;
-}
-
-label {
-    display: block;
-    margin-top: 12px;
-    font-size: 13px;
-    opacity: 0.9;
-}
-
-select, input[type="range"] {
-    width: 100%;
-    margin-top: 6px;
-}
-
-select {
-    padding: 8px;
-    border-radius: 10px;
-    border: none;
-}
-
-.controls {
-    display: flex;
-    gap: 10px;
-    margin-top: 18px;
-}
-
-button {
-    flex: 1;
-    border: none;
-    padding: 12px;
-    border-radius: 12px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: 0.25s;
-}
-
-.speak {
-    background: var(--accent);
-    color: #000;
-    box-shadow: 0 0 12px var(--accent);
-}
-
-.pause {
-    background: #ffaa00;
-}
-
-.stop {
-    background: #ff4b4b;
-    color: #fff;
-}
-
-button:hover {
-    transform: scale(1.08);
-}
-
-footer {
-    text-align: center;
-    margin-top: 12px;
-    font-size: 11px;
-    opacity: 0.7;
+  .codes h2 {
+    font-size: 24px;
+  }
 }
 </style>
+
+<script src="snippets.js"></script>
 </head>
 
 <body>
 
-<div class="tts-card">
-    <div class="header">
-        <h1>🎙 Text to Speech</h1>
-        <div class="toggle" onclick="toggleMode()">🌙</div>
-    </div>
+<header class="site-header">
+  <div class="brand">
+    <span>🐍</span>
+    <h1>ZingBook</h1>
+  </div>
+  <nav class="nav">
+    <a href="#">Home</a>
+  </nav>
+</header>
 
-    <textarea id="text" placeholder="Type something cool here..."></textarea>
+<main class="codes">
+  <h2>Python Snippets</h2>
+  <p class="muted">Fast • Clean • Developer-friendly</p>
 
-    <label>Voice (Language + Name)</label>
-    <select id="voiceSelect"></select>
+  <div class="filters">
+    <input id="search" type="search" placeholder="Search snippets or tags…" />
+  </div>
 
-    <!-- 🔥 Voice Style Presets -->
-    <label>Voice Style</label>
-    <select id="styleSelect">
-        <option value="default">Default</option>
-        <option value="narrator">Narrator</option>
-        <option value="gamer">Gamer</option>
-        <option value="robot">Robot</option>
-    </select>
+  <section id="snippetList" class="snippet-list"></section>
+</main>
 
-    <label>Speed</label>
-    <input type="range" id="rate" min="0.5" max="2" value="1" step="0.1">
-
-    <label>Pitch</label>
-    <input type="range" id="pitch" min="0" max="2" value="1" step="0.1">
-
-    <div class="controls">
-        <button class="speak" onclick="speakText()">▶ Speak</button>
-        <button class="pause" onclick="pauseSpeech()">⏸ Pause</button>
-        <button class="stop" onclick="stopSpeech()">⏹ Stop</button>
-    </div>
-
-    <footer>Powered by Web Speech API • SiteCraft Style</footer>
-</div>
+<footer class="site-footer">
+  © 2026 ZingBook • Built for Developers
+</footer>
 
 <script>
-const textInput = document.getElementById("text");
-const voiceSelect = document.getElementById("voiceSelect");
-const rateInput = document.getElementById("rate");
-const pitchInput = document.getElementById("pitch");
-const styleSelect = document.getElementById("styleSelect");
+const list = document.getElementById("snippetList");
 
-let voices = [];
-let utterance;
+SNIPPETS.forEach(s => {
+  const el = document.createElement("article");
+  el.className = "snippet";
+  el.dataset.tags = s.tags.join(" ");
 
-function loadVoices() {
-    voices = speechSynthesis.getVoices();
-    voiceSelect.innerHTML = "";
-    voices.forEach((voice, i) => {
-        const option = document.createElement("option");
-        option.value = i;
-        option.textContent = `${voice.lang} - ${voice.name}`;
-        voiceSelect.appendChild(option);
-    });
-}
+  el.innerHTML = `
+    <header class="snippet-header">
+      <h3>${s.title}</h3>
+      <button class="btn copy-btn" data-id="${s.id}">Copy</button>
+    </header>
 
-speechSynthesis.onvoiceschanged = loadVoices;
-loadVoices();
+    <pre class="code-block"><code id="${s.id}">${s.code}</code></pre>
 
-function applyVoiceStyle(u) {
-    switch (styleSelect.value) {
-        case "narrator":
-            u.rate = 0.85;
-            u.pitch = 0.9;
-            break;
-        case "gamer":
-            u.rate = 1.25;
-            u.pitch = 1.3;
-            break;
-        case "robot":
-            u.rate = 0.95;
-            u.pitch = 0.6;
-            break;
-        default:
-            u.rate = rateInput.value;
-            u.pitch = pitchInput.value;
-    }
-}
+    <footer class="snippet-meta">
+      ${s.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+    </footer>
+  `;
 
-function speakText() {
-    if (!textInput.value.trim()) {
-        alert("Enter some text!");
-        return;
-    }
+  list.appendChild(el);
+});
 
-    speechSynthesis.cancel();
+document.addEventListener("click", async e => {
+  const btn = e.target.closest(".copy-btn");
+  if (!btn) return;
 
-    utterance = new SpeechSynthesisUtterance(textInput.value);
-    utterance.voice = voices[voiceSelect.value];
+  const code = document.getElementById(btn.dataset.id);
+  await navigator.clipboard.writeText(code.textContent);
+  btn.textContent = "Copied ✓";
+  btn.style.color = "var(--accent)";
+  setTimeout(() => {
+    btn.textContent = "Copy";
+    btn.style.color = "";
+  }, 1200);
+});
 
-    applyVoiceStyle(utterance);
-
-    speechSynthesis.speak(utterance);
-}
-
-function pauseSpeech() {
-    speechSynthesis.paused ? speechSynthesis.resume() : speechSynthesis.pause();
-}
-
-function stopSpeech() {
-    speechSynthesis.cancel();
-}
-
-function toggleMode() {
-    document.body.classList.toggle("light");
-}
+document.getElementById("search").addEventListener("input", e => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll(".snippet").forEach(s => {
+    s.style.display =
+      s.querySelector("h3").textContent.toLowerCase().includes(q) ||
+      s.dataset.tags.includes(q)
+        ? ""
+        : "none";
+  });
+});
 </script>
 
 </body>
