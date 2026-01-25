@@ -7,22 +7,19 @@
 
 <style>
 :root {
-  --bg: #070a14;
-  --panel: #0f1528;
-  --panel-soft: #121a33;
-  --text: #e6ebf5;
+  --bg: #0b0f1a;
+  --panel: #12182a;
   --muted: #9aa3b2;
-  --border: rgba(255,255,255,0.08);
-  --accent: #6cf2c2;
-  --radius: 16px;
+  --text: #e6ebf5;
+  --border: #1f2a44;
+  --tag: #1b2236;
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --radius: 14px;
   --max-width: 1200px;
+  --accent: #4f7cff;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: system-ui, sans-serif;
@@ -32,26 +29,15 @@ body {
 
 /* HEADER */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  padding: 16px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #070a14;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--border);
 }
 
-.brand {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.brand h1 {
-  font-size: 18px;
-}
+.brand { display: flex; gap: 10px; align-items: center; }
+.brand h1 { font-size: 20px; }
 
 .nav a {
   color: var(--muted);
@@ -59,105 +45,102 @@ body {
   font-size: 14px;
 }
 
-.nav a:hover {
-  color: var(--accent);
-}
-
 /* MAIN */
 .codes {
   max-width: var(--max-width);
   margin: auto;
-  padding: 36px 16px;
+  padding: 30px 16px;
   text-align: center;
 }
 
-.codes h2 {
-  font-size: 26px;
-}
-
-.muted {
-  margin-top: 6px;
-  color: var(--muted);
-}
+.codes h2 { font-size: 26px; }
+.muted { color: var(--muted); margin-top: 6px; }
 
 /* SEARCH */
-.search-box {
-  margin-top: 24px;
+.filters {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 }
 
-.search-box input {
-  width: 100%;
+.filters input {
   max-width: 520px;
+  width: 100%;
   padding: 14px;
-  font-size: 15px;
-  background: var(--panel);
+  font-size: 16px;
+  background: #0e1426;
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 12px;
+  text-align: center;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.filters input:focus {
   outline: none;
-}
-
-.search-box input:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79,124,255,.15);
 }
 
-/* GRID */
+/* SNIPPETS */
 .snippet-list {
   display: grid;
   gap: 20px;
-  margin-top: 36px;
+  margin-top: 30px;
 }
 
-/* CARD */
 .snippet {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  overflow: hidden;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  box-shadow: var(--shadow);
+  transition: transform .25s ease, border-color .25s ease;
+  will-change: transform;
 }
 
 .snippet:hover {
   transform: translateY(-4px);
-  border-color: rgba(108,242,194,0.4);
+  border-color: var(--accent);
 }
 
 /* HEADER */
 .snippet-header {
-  padding: 14px 16px;
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--border);
 }
 
 .snippet-header h3 {
   font-size: 16px;
+  text-align: left;
 }
 
 /* BUTTON */
 .btn {
-  padding: 6px 14px;
-  font-size: 13px;
-  border-radius: 8px;
-  background: #0b1022;
+  padding: 8px 14px;
+  background: #0e1426;
   border: 1px solid var(--border);
   color: var(--text);
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 14px;
+  transition: background .2s, transform .2s;
 }
 
 .btn:hover {
-  border-color: var(--accent);
+  background: var(--accent);
+  transform: scale(1.05);
 }
 
 /* CODE */
 .code-block {
-  background: #0b1022;
   padding: 16px;
-  font-size: 13px;
+  background: #0e1426;
   overflow-x: auto;
+  text-align: left;
+  font-size: 14px;
 }
 
 .code-block code {
@@ -169,53 +152,49 @@ body {
 .snippet-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
   justify-content: center;
+  gap: 8px;
   padding: 12px;
-  background: var(--panel-soft);
 }
 
 .tag {
-  padding: 5px 12px;
-  font-size: 12px;
-  border-radius: 999px;
-  background: #0b1022;
+  background: var(--tag);
   color: var(--muted);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  transition: background .2s, color .2s;
 }
 
 .tag:hover {
-  color: var(--accent);
+  background: var(--accent);
+  color: #fff;
 }
 
 /* SHOW MORE */
 .show-more {
-  margin-top: 32px;
-  display: flex;
-  justify-content: center;
-}
-
-.show-more button {
-  padding: 10px 22px;
-  font-size: 14px;
-  border-radius: 12px;
-  background: #0b1022;
-  border: 1px solid var(--border);
-  color: var(--text);
-  cursor: pointer;
-}
-
-.show-more button:hover {
-  border-color: var(--accent);
+  margin-top: 25px;
+  text-align: center;
 }
 
 /* FOOTER */
 .site-footer {
-  margin-top: 48px;
+  margin-top: 40px;
   padding: 20px;
   border-top: 1px solid var(--border);
   text-align: center;
   font-size: 13px;
   color: var(--muted);
+}
+
+/* MOBILE OPT */
+@media (hover: none) {
+  .snippet:hover { transform: none; border-color: var(--border); }
+}
+
+@media (max-width: 600px) {
+  .snippet-header { flex-direction: column; align-items: flex-start; }
+  .btn { width: 100%; }
 }
 </style>
 
@@ -229,23 +208,21 @@ body {
     <span>🐍</span>
     <h1>ZingBook</h1>
   </div>
-  <nav class="nav">
-    <a href="#">Home</a>
-  </nav>
+  <nav class="nav"><a href="#">Home</a></nav>
 </header>
 
 <main class="codes">
   <h2>Python Snippets</h2>
-  <p class="muted">Fast • Clean • Smooth</p>
+  <p class="muted">Fast • Clean • Professional</p>
 
-  <div class="search-box">
+  <div class="filters">
     <input id="search" type="search" placeholder="Search snippets…" />
   </div>
 
   <section id="snippetList" class="snippet-list"></section>
 
   <div class="show-more">
-    <button id="showMoreBtn">Show More</button>
+    <button id="moreBtn" class="btn">Show More</button>
   </div>
 </main>
 
@@ -256,14 +233,16 @@ body {
 <script>
 const list = document.getElementById("snippetList");
 const search = document.getElementById("search");
-const showMoreBtn = document.getElementById("showMoreBtn");
+const moreBtn = document.getElementById("moreBtn");
 
 let visible = 5;
-const STEP = 5;
-let filtered = [];
+let filtered = SNIPPETS;
 
+/* RENDER (FAST) */
 function render() {
   list.innerHTML = "";
+  const frag = document.createDocumentFragment();
+
   filtered.slice(0, visible).forEach(s => {
     const el = document.createElement("article");
     el.className = "snippet";
@@ -277,32 +256,23 @@ function render() {
         ${s.tags.map(t => `<span class="tag">${t}</span>`).join("")}
       </footer>
     `;
-    list.appendChild(el);
+    frag.appendChild(el);
   });
 
-  showMoreBtn.style.display =
-    visible < filtered.length ? "block" : "none";
+  list.appendChild(frag);
+  moreBtn.style.display = visible >= filtered.length ? "none" : "inline-block";
 }
 
-function filter() {
-  const q = search.value.toLowerCase();
-  visible = STEP;
-  filtered = SNIPPETS.filter(s =>
-    (s.title + s.code + s.tags.join(" "))
-      .toLowerCase()
-      .includes(q)
-  );
+render();
+
+/* SHOW MORE */
+moreBtn.onclick = () => {
+  visible += 5;
   render();
-}
+};
 
-search.addEventListener("input", filter);
-
-showMoreBtn.addEventListener("click", () => {
-  visible += STEP;
-  render();
-});
-
-document.addEventListener("click", async e => {
+/* COPY (OPTIMIZED) */
+list.addEventListener("click", async e => {
   const btn = e.target.closest(".copy-btn");
   if (!btn) return;
   const code = document.getElementById(btn.dataset.id);
@@ -311,8 +281,20 @@ document.addEventListener("click", async e => {
   setTimeout(() => btn.textContent = "Copy", 1200);
 });
 
-filtered = [...SNIPPETS];
-render();
+/* DEBOUNCED SEARCH */
+let t;
+search.addEventListener("input", () => {
+  clearTimeout(t);
+  t = setTimeout(() => {
+    const q = search.value.toLowerCase();
+    filtered = SNIPPETS.filter(s =>
+      s.title.toLowerCase().includes(q) ||
+      s.tags.join(" ").includes(q)
+    );
+    visible = 5;
+    render();
+  }, 180);
+});
 </script>
 
 </body>
