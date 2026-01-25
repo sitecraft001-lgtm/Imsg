@@ -7,17 +7,17 @@
 
 <style>
 :root {
-  --bg: radial-gradient(1200px 600px at top, #111836, #06080f);
-  --panel: rgba(18, 24, 42, 0.85);
+  --bg: radial-gradient(1000px 600px at top, #111836, #05070d);
+  --panel: rgba(20, 26, 48, 0.88);
+  --panel-soft: rgba(255,255,255,0.03);
+  --text: #e8ecf6;
   --muted: #9aa3b2;
-  --text: #e6ebf5;
   --border: rgba(255,255,255,0.08);
-  --tag: rgba(255,255,255,0.08);
   --accent: #6cf2c2;
-  --shadow: 0 20px 40px rgba(0,0,0,0.55);
-  --radius: 16px;
+  --accent-soft: rgba(108,242,194,0.2);
+  --shadow: 0 25px 60px rgba(0,0,0,0.6);
+  --radius: 18px;
   --max-width: 1200px;
-  --blur: blur(14px);
 }
 
 * {
@@ -27,7 +27,7 @@
 }
 
 body {
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: Inter, system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -35,12 +35,15 @@ body {
 
 /* HEADER */
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 22px;
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: var(--blur);
 }
 
 .brand {
@@ -52,14 +55,12 @@ body {
 .brand h1 {
   font-size: 20px;
   font-weight: 600;
-  letter-spacing: 0.4px;
 }
 
 .nav a {
   color: var(--muted);
   text-decoration: none;
   font-size: 14px;
-  transition: color 0.25s ease;
 }
 
 .nav a:hover {
@@ -70,172 +71,160 @@ body {
 .codes {
   max-width: var(--max-width);
   margin: auto;
-  padding: 40px 16px;
+  padding: 48px 16px;
   text-align: center;
 }
 
 .codes h2 {
-  font-size: 30px;
-  font-weight: 700;
+  font-size: 32px;
   letter-spacing: 0.6px;
 }
 
 .muted {
   color: var(--muted);
   margin-top: 8px;
-  font-size: 14px;
 }
 
-/* SEARCH */
-.filters {
-  margin-top: 28px;
+/* SEARCH BAR */
+.search-box {
+  margin-top: 32px;
   display: flex;
   justify-content: center;
 }
 
-.filters input {
-  max-width: 540px;
+.search-box input {
   width: 100%;
-  padding: 16px;
+  max-width: 560px;
+  padding: 16px 18px;
   font-size: 15px;
-  background: rgba(14, 20, 38, 0.9);
+  background: rgba(10,14,30,0.95);
   color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  text-align: center;
+  border-radius: 16px;
   outline: none;
   transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
-.filters input:focus {
+.search-box input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(108,242,194,0.15);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
-/* SNIPPETS */
+/* GRID */
 .snippet-list {
   display: grid;
-  gap: 26px;
-  margin-top: 40px;
+  gap: 28px;
+  margin-top: 48px;
 }
 
+/* CARD */
 .snippet {
-  background: var(--panel);
-  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--panel), rgba(12,16,32,0.95));
   border-radius: var(--radius);
+  border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  backdrop-filter: var(--blur);
+  overflow: hidden;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .snippet:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.65);
+  transform: translateY(-8px);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.75);
 }
 
-/* SNIPPET HEADER */
+/* CARD HEADER */
 .snippet-header {
-  padding: 16px;
-  border-bottom: 1px solid var(--border);
+  padding: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  border-bottom: 1px solid var(--border);
 }
 
 .snippet-header h3 {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   text-align: left;
 }
 
 /* BUTTON */
 .btn {
-  padding: 9px 16px;
-  background: linear-gradient(135deg, #0e1426, #141c36);
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1a2140, #0f1430);
   border: 1px solid var(--border);
   color: var(--text);
-  border-radius: 10px;
   cursor: pointer;
   font-size: 14px;
-  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-}
-
-.btn:active {
-  transform: scale(0.96);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.5);
 }
 
 /* CODE */
 .code-block {
+  background: #070b1f;
   padding: 18px;
-  background: rgba(10, 14, 30, 0.9);
-  overflow-x: auto;
-  text-align: left;
   font-size: 14px;
+  line-height: 1.6;
+  overflow-x: auto;
 }
 
 .code-block code {
   font-family: "JetBrains Mono", monospace;
   white-space: pre;
-  line-height: 1.6;
+  color: #cdd6ff;
 }
 
 /* TAGS */
 .snippet-meta {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 10px;
-  padding: 14px;
+  justify-content: center;
+  padding: 16px;
+  background: var(--panel-soft);
 }
 
 .tag {
-  background: var(--tag);
-  color: var(--muted);
   padding: 6px 14px;
   border-radius: 999px;
   font-size: 12px;
+  color: var(--muted);
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
   transition: background 0.25s ease, color 0.25s ease;
 }
 
-.tag:hover {
-  background: rgba(108,242,194,0.15);
+.tag:hover,
+.tag.active {
+  background: var(--accent-soft);
   color: var(--accent);
 }
 
 /* FOOTER */
 .site-footer {
-  margin-top: 60px;
-  padding: 22px;
+  margin-top: 64px;
+  padding: 24px;
   border-top: 1px solid var(--border);
-  text-align: center;
-  font-size: 13px;
   color: var(--muted);
+  font-size: 13px;
+  text-align: center;
 }
 
-/* 📱 MOBILE */
+/* MOBILE */
 @media (max-width: 600px) {
-  .site-header {
-    flex-direction: column;
-    gap: 12px;
-  }
-
   .snippet-header {
     flex-direction: column;
+    gap: 12px;
     align-items: stretch;
   }
 
   .btn {
     width: 100%;
-  }
-
-  .codes h2 {
-    font-size: 24px;
   }
 }
 </style>
@@ -257,26 +246,29 @@ body {
 
 <main class="codes">
   <h2>Python Snippets</h2>
-  <p class="muted">Fast • Clean • Developer-friendly</p>
+  <p class="muted">Search • Filter • Copy instantly</p>
 
-  <div class="filters">
-    <input id="search" type="search" placeholder="Search snippets or tags…" />
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search by title, tag, or code…" />
   </div>
 
   <section id="snippetList" class="snippet-list"></section>
 </main>
 
 <footer class="site-footer">
-  © 2026 ZingBook • Built for Developers
+  © 2026 ZingBook • Premium Snippet Library
 </footer>
 
 <script>
 const list = document.getElementById("snippetList");
+const search = document.getElementById("search");
+let activeTag = "";
 
 SNIPPETS.forEach(s => {
   const el = document.createElement("article");
   el.className = "snippet";
-  el.dataset.tags = s.tags.join(" ");
+  el.dataset.search =
+    (s.title + " " + s.code + " " + s.tags.join(" ")).toLowerCase();
 
   el.innerHTML = `
     <header class="snippet-header">
@@ -287,37 +279,47 @@ SNIPPETS.forEach(s => {
     <pre class="code-block"><code id="${s.id}">${s.code}</code></pre>
 
     <footer class="snippet-meta">
-      ${s.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+      ${s.tags.map(t => `<span class="tag" data-tag="${t}">${t}</span>`).join("")}
     </footer>
   `;
 
   list.appendChild(el);
 });
 
+/* COPY */
 document.addEventListener("click", async e => {
   const btn = e.target.closest(".copy-btn");
-  if (!btn) return;
+  if (btn) {
+    const code = document.getElementById(btn.dataset.id);
+    await navigator.clipboard.writeText(code.textContent);
+    btn.textContent = "Copied ✓";
+    setTimeout(() => btn.textContent = "Copy", 1200);
+  }
 
-  const code = document.getElementById(btn.dataset.id);
-  await navigator.clipboard.writeText(code.textContent);
-  btn.textContent = "Copied ✓";
-  btn.style.color = "var(--accent)";
-  setTimeout(() => {
-    btn.textContent = "Copy";
-    btn.style.color = "";
-  }, 1200);
+  const tag = e.target.closest(".tag");
+  if (tag) {
+    activeTag = tag.dataset.tag.toLowerCase();
+    document.querySelectorAll(".tag").forEach(t => t.classList.remove("active"));
+    tag.classList.add("active");
+    filterSnippets();
+  }
 });
 
-document.getElementById("search").addEventListener("input", e => {
-  const q = e.target.value.toLowerCase();
+/* SEARCH */
+search.addEventListener("input", () => {
+  activeTag = "";
+  document.querySelectorAll(".tag").forEach(t => t.classList.remove("active"));
+  filterSnippets();
+});
+
+function filterSnippets() {
+  const q = search.value.toLowerCase();
   document.querySelectorAll(".snippet").forEach(s => {
-    s.style.display =
-      s.querySelector("h3").textContent.toLowerCase().includes(q) ||
-      s.dataset.tags.includes(q)
-        ? ""
-        : "none";
+    const matchText = s.dataset.search.includes(q);
+    const matchTag = !activeTag || s.dataset.search.includes(activeTag);
+    s.style.display = matchText && matchTag ? "" : "none";
   });
-});
+}
 </script>
 
 </body>
