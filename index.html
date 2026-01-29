@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image to PDF | CodeZing Tools</title>
+<title>Image to PDF | SiteCraft Tools</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -137,7 +137,7 @@ button:disabled {
 
 <div class="app">
   <div class="header">
-    <div class="logo">CZ</div>
+    <div class="logo">SC</div>
     <div>
       <h1>Image to PDF</h1>
       <div class="subtitle">Fast • Secure • Client Side</div>
@@ -215,7 +215,13 @@ btn.onclick = async () => {
     pdf.addImage(img, "JPEG", 0, 0, w, h);
   }
 
-  pdf.save("codezing-image-to-pdf.pdf");
+  // Auto increment filename
+  let count = localStorage.getItem("sitecraftPdfCount") || 0;
+  count++;
+  localStorage.setItem("sitecraftPdfCount", count);
+
+  pdf.save(`sitecraft-image-to-pdf${count}.pdf`);
+
   loader.style.display = "none";
   btn.disabled = false;
 };
