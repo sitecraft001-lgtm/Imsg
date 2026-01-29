@@ -165,6 +165,7 @@ const btn = document.getElementById("convert");
 const loader = document.getElementById("loader");
 
 let images = [];
+let currentFileNumber = null; // Track current batch number
 
 dz.onclick = () => input.click();
 
@@ -193,11 +194,13 @@ function loadFiles(files) {
   });
   info.textContent = images.length + " image(s) selected";
   btn.disabled = images.length === 0;
+  currentFileNumber = null; // Reset number for new batch
 }
 
 btn.onclick = async () => {
-  loader.style.display = "block";
+  if (btn.disabled) return;
   btn.disabled = true;
+  loader.style.display = "block";
 
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF();
@@ -215,12 +218,15 @@ btn.onclick = async () => {
     pdf.addImage(img, "JPEG", 0, 0, w, h);
   }
 
-  // Auto increment filename
-  let count = localStorage.getItem("sitecraftPdfCount") || 0;
-  count++;
-  localStorage.setItem("sitecraftPdfCount", count);
+  // ✅ Increment file number only once per batch
+  if (currentFileNumber === null) {
+    let count = localStorage.getItem("sitecraftPdfCount") || 0;
+    count++;
+    localStorage.setItem("sitecraftPdfCount", count);
+    currentFileNumber = count;
+  }
 
-  pdf.save(`sitecraft-image-to-pdf${count}.pdf`);
+  pdf.save(`sitecraft-image-to-pdf${currentFileNumber}.pdf`);
 
   loader.style.display = "none";
   btn.disabled = false;
