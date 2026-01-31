@@ -1,245 +1,166 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image to PDF | SiteCraft Tools</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: 'Inter', system-ui;
-  background: radial-gradient(1200px 600px at top, #0f172a, #020617);
-  color: #e5e7eb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.app {
-  width: 95%;
-  max-width: 520px;
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 28px;
-  box-shadow: 0 30px 80px rgba(0,0,0,.7);
-  border: 1px solid rgba(255,255,255,.06);
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.logo {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #38bdf8, #818cf8);
-  display: grid;
-  place-items: center;
-  font-weight: 800;
-  color: #020617;
-}
-
-h1 {
-  font-size: 20px;
-  margin: 0;
-}
-
-.subtitle {
-  font-size: 13px;
-  color: #94a3b8;
-}
-
-.dropzone {
-  margin-top: 20px;
-  border: 2px dashed #38bdf8;
-  border-radius: 18px;
-  padding: 30px;
-  text-align: center;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.dropzone:hover {
-  background: rgba(56,189,248,.08);
-}
-
-.dropzone.drag {
-  background: rgba(56,189,248,.15);
-  border-color: #818cf8;
-}
-
-.dropzone p {
-  margin: 0;
-  font-size: 14px;
-}
-
-.preview {
-  margin-top: 18px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px,1fr));
-  gap: 12px;
-}
-
-.preview img {
-  width: 100%;
-  height: 90px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.08);
-}
-
-.info {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #94a3b8;
-}
-
-button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 14px;
-  border: none;
-  font-weight: 700;
-  background: linear-gradient(135deg, #38bdf8, #818cf8);
-  color: #020617;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-button:disabled {
-  opacity: .5;
-}
-
-.loader {
-  display: none;
-  text-align: center;
-  margin-top: 14px;
-  font-size: 13px;
-  color: #38bdf8;
-}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AquaVoyage Travels — Premium Tours</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="app">
-  <div class="header">
-    <div class="logo">SC</div>
+<!-- Header -->
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo"></div>
+      <a href="index.html">AquaVoyage Travels</a>
+    </div>
+    <button class="menu-btn" aria-label="Menu" onclick="toggleMenu()">☰</button>
+    <ul id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="packages.html">Tour Packages</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a class="cta" href="booking.html">Book Now</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="hero-card">
+      <h1>Discover premium tours crafted for comfort and wonder</h1>
+      <p>From tropical escapes to alpine adventures—handpicked itineraries, transparent pricing, and concierge‑level care.</p>
+      <div class="search">
+        <input class="input" type="text" placeholder="Search destination" id="searchInput">
+        <select id="monthSelect">
+          <option value="">Travel month</option>
+          <option>February</option>
+          <option>March</option>
+          <option>April</option>
+        </select>
+        <button class="btn" onclick="quickSearch()">Find Packages</button>
+        <a class="btn secondary" href="packages.html">Browse all</a>
+      </div>
+    </div>
+    <img src="img3.jpg" alt="Hero Image">
+  </section>
+
+  <section class="section">
+    <div class="banner">Limited‑time offers: Save up to 20% on spring departures.</div>
+  </section>
+
+  <section class="section">
+    <h2>Featured packages</h2>
+    <div class="grid">
+      <!-- Card 1 -->
+      <article class="card">
+        <img src="img5.jpg" alt="Bali Serenity Escape">
+        <div class="card-body">
+          <h3 class="card-title">Bali Serenity Escape</h3>
+          <div class="meta"><span>6 nights</span>•<span>4★ resorts</span></div>
+          <div class="price">₹58,000</div>
+          <div class="card-actions">
+            <a class="btn" href="package.html?id=bali">View Details</a>
+            <a class="btn secondary" href="#booking?pkg=bali">Book Now</a>
+          </div>
+        </div>
+      </article>
+      <!-- Card 2 -->
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1200&auto=format&fit=crop" alt="Paris Art & Café Trail">
+        <div class="card-body">
+          <h3 class="card-title">Paris Art & Café Trail</h3>
+          <div class="meta"><span>5 nights</span>•<span>City boutique</span></div>
+          <div class="price">₹92,000</div>
+          <div class="card-actions">
+            <a class="btn" href="package.html?id=paris">View Details</a>
+            <a class="btn secondary" href="booking.html?pkg=paris">Book Now</a>
+          </div>
+        </div>
+      </article>
+      <!-- Card 3 -->
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop" alt="Swiss Alps Panorama">
+        <div class="card-body">
+          <h3 class="card-title">Swiss Alps Panorama</h3>
+          <div class="meta"><span>7 nights</span>•<span>Rail & chalet</span></div>
+          <div class="price">₹1,35,000</div>
+          <div class="card-actions">
+            <a class="btn" href="package.html?id=swiss">View Details</a>
+            <a class="btn secondary" href="booking.html?pkg=swiss">Book Now</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<main class="container">
+  <section class="section">
+    <h2>Secure your trip</h2>
+    <form class="hero-card" onsubmit="return submitBooking(event)">
+      <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+        <div>
+          <label>Name</label>
+          <input class="input" required id="name">
+        </div>
+        <div>
+          <label>Email</label>
+          <input class="input" type="email" required id="email">
+        </div>
+        <div>
+          <label>Package</label>
+          <input class="input" id="pkg" placeholder="e.g., Bali Serenity">
+        </div>
+        <div>
+          <label>Travel dates</label>
+          <input class="input" type="text" id="dates" placeholder="DD/MM/YYYY – DD/MM/YYYY">
+        </div>
+        <div>
+          <label>Guests</label>
+          <input class="input" type="number" min="1" value="2" id="guests">
+        </div>
+        <div>
+          <label>Notes</label>
+          <input class="input" id="notes" placeholder="Preferences, special requests">
+        </div>
+      </div>
+      <div class="card-actions" style="margin-top:16px">
+        <button class="btn" type="submit">Request Booking</button>
+        <a class="btn secondary" href="packages.html">Browse Packages</a>
+      </div>
+      <p id="bookingMsg" class="muted" style="margin-top:10px"></p>
+    </form>
+  </section>
+</main>
+
+<footer><footer>
+  <div class="container footer-wrap">
     <div>
-      <h1>Image to PDF</h1>
-      <div class="subtitle">Fast • Secure • Client Side</div>
+      <h4>AquaVoyage Travels</h4>
+      <p class="muted">Curated journeys with seamless planning and premium comfort.</p>
+      <div class="tag">IATA Certified</div>
+      <div class="tag">24/7 Support</div>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <p><a href="destinations.html">Destinations</a></p>
+      <p><a href="packages.html">Packages</a></p>
+      <p><a href="booking.html">Booking</a></p>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <p><a href="about.html">About</a></p>
+      <p><a href="contact.html">Contact</a></p>
+      <p><a href="faq.html">FAQ</a></p>
     </div>
   </div>
 
-  <div class="dropzone" id="dropzone">
-    <p>Click or drag images here</p>
-    <input type="file" id="files" multiple accept="image/*" hidden>
-  </div>
+  <div class="container copy">© 2026 AquaVoyage Travels. All rights reserved.</div>
+</footer>
 
-  <div class="preview" id="preview"></div>
-  <div class="info" id="info">No files selected</div>
-
-  <button id="convert" disabled>Convert & Download</button>
-  <div class="loader" id="loader">Converting images...</div>
-</div>
-
-<script>
-const dz = document.getElementById("dropzone");
-const input = document.getElementById("files");
-const preview = document.getElementById("preview");
-const info = document.getElementById("info");
-const btn = document.getElementById("convert");
-const loader = document.getElementById("loader");
-
-let images = [];
-let currentFileNumber = null; // Track current batch number
-
-dz.onclick = () => input.click();
-
-dz.ondragover = e => {
-  e.preventDefault();
-  dz.classList.add("drag");
-};
-
-dz.ondragleave = () => dz.classList.remove("drag");
-
-dz.ondrop = e => {
-  e.preventDefault();
-  dz.classList.remove("drag");
-  loadFiles(e.dataTransfer.files);
-};
-
-input.onchange = () => loadFiles(input.files);
-
-function loadFiles(files) {
-  images = [...files];
-  preview.innerHTML = "";
-  images.forEach(f => {
-    const img = document.createElement("img");
-    img.src = URL.createObjectURL(f);
-    preview.appendChild(img);
-  });
-  info.textContent = images.length + " image(s) selected";
-  btn.disabled = images.length === 0;
-  currentFileNumber = null; // Reset number for new batch
-}
-
-btn.onclick = async () => {
-  if (btn.disabled) return;
-  btn.disabled = true;
-  loader.style.display = "block";
-
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF();
-
-  for (let i = 0; i < images.length; i++) {
-    const data = await toBase64(images[i]);
-    const img = new Image();
-    img.src = data;
-    await new Promise(r => img.onload = r);
-
-    const w = pdf.internal.pageSize.getWidth();
-    const h = (img.height * w) / img.width;
-
-    if (i > 0) pdf.addPage();
-    pdf.addImage(img, "JPEG", 0, 0, w, h);
-  }
-
-  // ✅ Increment file number only once per batch
-  if (currentFileNumber === null) {
-    let count = localStorage.getItem("sitecraftPdfCount") || 0;
-    count++;
-    localStorage.setItem("sitecraftPdfCount", count);
-    currentFileNumber = count;
-  }
-
-  pdf.save(`sitecraft-image-to-pdf${currentFileNumber}.pdf`);
-
-  loader.style.display = "none";
-  btn.disabled = false;
-};
-
-function toBase64(file) {
-  return new Promise(res => {
-    const reader = new FileReader();
-    reader.onload = e => res(e.target.result);
-    reader.readAsDataURL(file);
-  });
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
