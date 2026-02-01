@@ -1,166 +1,17 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AquaVoyage Travels — Premium Tours</title>
-<link rel="stylesheet" href="styles.css">
+  <title>Tools</title>
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <h1>My First App</h1>
+  <p>This works offline</p>
 
-<!-- Header -->
-<header>
-  <div class="container nav">
-    <div class="brand">
-      <div class="logo"></div>
-      <a href="index.html">AquaVoyage Travels</a>
-    </div>
-    <button class="menu-btn" aria-label="Menu" onclick="toggleMenu()">☰</button>
-    <ul id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="destinations.html">Destinations</a></li>
-      <li><a href="packages.html">Tour Packages</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="faq.html">FAQ</a></li>
-      <li><a class="cta" href="booking.html">Book Now</a></li>
-    </ul>
-  </div>
-</header>
-
-<main class="container">
-  <section class="hero">
-    <div class="hero-card">
-      <h1>Discover premium tours crafted for comfort and wonder</h1>
-      <p>From tropical escapes to alpine adventures—handpicked itineraries, transparent pricing, and concierge‑level care.</p>
-      <div class="search">
-        <input class="input" type="text" placeholder="Search destination" id="searchInput">
-        <select id="monthSelect">
-          <option value="">Travel month</option>
-          <option>February</option>
-          <option>March</option>
-          <option>April</option>
-        </select>
-        <button class="btn" onclick="quickSearch()">Find Packages</button>
-        <a class="btn secondary" href="packages.html">Browse all</a>
-      </div>
-    </div>
-    <img src="img3.jpg" alt="Hero Image">
-  </section>
-
-  <section class="section">
-    <div class="banner">Limited‑time offers: Save up to 20% on spring departures.</div>
-  </section>
-
-  <section class="section">
-    <h2>Featured packages</h2>
-    <div class="grid">
-      <!-- Card 1 -->
-      <article class="card">
-        <img src="img5.jpg" alt="Bali Serenity Escape">
-        <div class="card-body">
-          <h3 class="card-title">Bali Serenity Escape</h3>
-          <div class="meta"><span>6 nights</span>•<span>4★ resorts</span></div>
-          <div class="price">₹58,000</div>
-          <div class="card-actions">
-            <a class="btn" href="package.html?id=bali">View Details</a>
-            <a class="btn secondary" href="#booking?pkg=bali">Book Now</a>
-          </div>
-        </div>
-      </article>
-      <!-- Card 2 -->
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1200&auto=format&fit=crop" alt="Paris Art & Café Trail">
-        <div class="card-body">
-          <h3 class="card-title">Paris Art & Café Trail</h3>
-          <div class="meta"><span>5 nights</span>•<span>City boutique</span></div>
-          <div class="price">₹92,000</div>
-          <div class="card-actions">
-            <a class="btn" href="package.html?id=paris">View Details</a>
-            <a class="btn secondary" href="booking.html?pkg=paris">Book Now</a>
-          </div>
-        </div>
-      </article>
-      <!-- Card 3 -->
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop" alt="Swiss Alps Panorama">
-        <div class="card-body">
-          <h3 class="card-title">Swiss Alps Panorama</h3>
-          <div class="meta"><span>7 nights</span>•<span>Rail & chalet</span></div>
-          <div class="price">₹1,35,000</div>
-          <div class="card-actions">
-            <a class="btn" href="package.html?id=swiss">View Details</a>
-            <a class="btn secondary" href="booking.html?pkg=swiss">Book Now</a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
-</main>
-
-<main class="container">
-  <section class="section">
-    <h2>Secure your trip</h2>
-    <form class="hero-card" onsubmit="return submitBooking(event)">
-      <div class="grid" style="grid-template-columns:repeat(2,1fr)">
-        <div>
-          <label>Name</label>
-          <input class="input" required id="name">
-        </div>
-        <div>
-          <label>Email</label>
-          <input class="input" type="email" required id="email">
-        </div>
-        <div>
-          <label>Package</label>
-          <input class="input" id="pkg" placeholder="e.g., Bali Serenity">
-        </div>
-        <div>
-          <label>Travel dates</label>
-          <input class="input" type="text" id="dates" placeholder="DD/MM/YYYY – DD/MM/YYYY">
-        </div>
-        <div>
-          <label>Guests</label>
-          <input class="input" type="number" min="1" value="2" id="guests">
-        </div>
-        <div>
-          <label>Notes</label>
-          <input class="input" id="notes" placeholder="Preferences, special requests">
-        </div>
-      </div>
-      <div class="card-actions" style="margin-top:16px">
-        <button class="btn" type="submit">Request Booking</button>
-        <a class="btn secondary" href="packages.html">Browse Packages</a>
-      </div>
-      <p id="bookingMsg" class="muted" style="margin-top:10px"></p>
-    </form>
-  </section>
-</main>
-
-<footer><footer>
-  <div class="container footer-wrap">
-    <div>
-      <h4>AquaVoyage Travels</h4>
-      <p class="muted">Curated journeys with seamless planning and premium comfort.</p>
-      <div class="tag">IATA Certified</div>
-      <div class="tag">24/7 Support</div>
-    </div>
-    <div>
-      <h4>Explore</h4>
-      <p><a href="destinations.html">Destinations</a></p>
-      <p><a href="packages.html">Packages</a></p>
-      <p><a href="booking.html">Booking</a></p>
-    </div>
-    <div>
-      <h4>Company</h4>
-      <p><a href="about.html">About</a></p>
-      <p><a href="contact.html">Contact</a></p>
-      <p><a href="faq.html">FAQ</a></p>
-    </div>
-  </div>
-
-  <div class="container copy">© 2026 AquaVoyage Travels. All rights reserved.</div>
-</footer>
-
-<script src="script.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js");
+    }
+  </script>
 </body>
 </html>
